@@ -1,8 +1,12 @@
-export type cclass = 'A' | 'B' | 'C';
+import { Router } from "express";
+import { createCar, getCar,  deleteCar,getCars } from "../modules/car";
+import { validateCar } from "../middlewares/validation";
 
-export type car={
-    id: number;
-    brand: string;
-    model: string;
-    carclass: cclass;
-}
+export const carRoutes = Router(); 
+
+carRoutes.get("/", getCars);
+
+carRoutes.get("/:id", getCar);
+carRoutes.post("/", validateCar, createCar);
+carRoutes.put("/:id", validateCar, deleteCar); 
+
